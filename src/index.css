@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 800px;
+  margin: 0 auto;
 }
 
 code {
@@ -14,4 +16,14 @@ code {
 
 .image{
   width:100px;
+}
+
+.segments{
+  margin-top: 20px !important;
+  /* color:red; */
+
+}
+.flex{
+  display:flex;
+  margin-left: 50px;
 }
