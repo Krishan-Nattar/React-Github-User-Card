@@ -6,6 +6,7 @@ const UserCard = props => {
   console.log(user);
   return (
     <div>
+        
       <div>{user.name}</div>
       <div>{user.bio}</div>
       <div>{user.location}</div>
