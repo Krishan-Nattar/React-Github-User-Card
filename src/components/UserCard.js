@@ -1,15 +1,15 @@
 import React from "react";
 
 const UserCard = props => {
-  // console.log(props.data)
-  const user = props.data;
-  console.log(user);
+
+  const user = props.user;
+
   return (
     <div>
-        
-      <div>{user.name}</div>
-      <div>{user.bio}</div>
+      <div>{user.login}</div>
+      <img src={user.avatar_url} className="image"/>
       <div>{user.location}</div>
+      <img src={`http://ghchart.rshah.org/${user.login}`} />
     </div>
   );
 };

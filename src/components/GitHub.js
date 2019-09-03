@@ -1,50 +1,61 @@
 import React, { Component } from "react";
 import axios from "axios";
 import UserCard from "./UserCard";
+import Search from './Search';
 
 class GitHub extends Component {
   constructor() {
     super();
     this.state = {
       data: [],
-      followers: []
+      followers: [],
+      search: "krishan-nattar"
     };
   }
 
   componentDidMount() {
     axios.get("https://api.github.com/users/krishan-nattar").then(res => {
       this.setState({ data: [res.data] });
+    });
 
+    axios
+      .get("https://api.github.com/users/krishan-nattar/followers")
+      .then(res => {
+        const followers = res.data;
+        this.setState({ followers: followers });
+      });
+  }
+
+
+handleChange = (event) =>{
+
+this.setState({search: event.target.value})
+}
+handleSearch = (event)=>{
+    event.preventDefault();
+    axios.get(`https://api.github.com/users/${this.state.search}`).then(res => {
+        this.setState({ data: [res.data] });
+      });
+  
       axios
-        .get("https://api.github.com/users/krishan-nattar/followers")
+        .get(`https://api.github.com/users/${this.state.search}/followers`)
         .then(res => {
           const followers = res.data;
-          const followerArray = [];
-
-          followers.forEach(person => {
-            axios
-              .get(`https://api.github.com/users/${person.login}`)
-              .then(res => {
-                followerArray.push(res.data);
-              });
-          });
-          console.log(followerArray);
-          this.setState({ followers: followerArray });
+          this.setState({ followers: followers });
         });
-    });
-  }
+}
   render() {
-    console.log(this.state.followers);
-
-    this.state.followers.forEach(item => {
-      console.log(item);
-    });
     return (
       <div>
-        GitHub Component
-        {this.state.followers.map(person => {
-          return <h1>Hello!</h1>;
-        })}
+        <Search handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+        {this.state.data
+          ? this.state.data.map(user => <UserCard user={this.state.data[0]} />)
+          : null}
+        {this.state.followers
+          ? this.state.followers.map(person => {
+              return <UserCard user={person} />;
+            })
+          : null}
       </div>
     );
   }
@@ -52,22 +63,3 @@ class GitHub extends Component {
 
 export default GitHub;
 
-{
-  /*                 
-                {(this.state.data[0]) ? <UserCard data={this.state.data[0]}/> : null}
-                {this.state.data.map(thing=>{
-                    return <h1>Hello2</h1>
-                })} */
-}
-{
-  /* {(this.state.followers) ? this.state.followers.map(person=>{ */
-}
-{
-  /* return <UserCard data={person}/> */
-}
-{
-  /* return <h1>hi</h1> */
-}
-{
-  /* }) : null} */
-}
