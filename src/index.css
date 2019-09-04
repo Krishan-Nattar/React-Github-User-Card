@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 800px;
+  width: 900px;
   margin: 0 auto;
 }
 
@@ -23,5 +23,8 @@ code {
 }
 .flex{
   display:flex;
-  margin-left: 50px;
+  /* margin-left: 50px;*/
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
 }

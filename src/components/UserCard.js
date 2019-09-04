@@ -11,15 +11,13 @@ const UserCard = props => {
             <img src={user.avatar_url} className="image" />
             <div>{user.name}</div>
             <div>{user.location}</div>
+            <div><a href={user.html_url}>View GitHub</a></div>
+            <div>{(user.blog) ? <a href={user.blog}>View Website</a> :null}</div>
           </div>
-          <div>
-            <div>
-              <a href={user.html_url}>View GitHub</a>
-            </div>
-            {(user.blog) ? <a href={user.blog}>View Website</a> :null}
-          </div>
+          <img src={`http://ghchart.rshah.org/${user.login}`} />
+          
         </div>
-        <img src={`http://ghchart.rshah.org/${user.login}`} />
+        
       </Segment>
     </div>
   );
